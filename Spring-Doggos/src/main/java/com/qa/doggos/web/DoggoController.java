@@ -22,7 +22,7 @@ import com.qa.doggos.service.DoggoService;
 public class DoggoController {
 
 	private DoggoService service;
-	
+
 	@Autowired // Dependency Injection
 
 	public DoggoController(DoggoService service) {

@@ -46,10 +46,11 @@ public class DinoControllerIntegrationTest {
 		Doggo testDoggoCreated = new Doggo(1, "Mega Noms", 5, "Sausage");
 		String testCreatedDoggoAsJSON = this.mapper.writeValueAsString(testDoggoCreated);
 
-		ResultMatcher checkStatus = status().isCreated(); // checks is status 201 (Created)
-		ResultMatcher checkBody = content().json(testCreatedDoggoAsJSON); // does the body match
-		this.mvc.perform(req).andExpect(checkStatus).andExpect(checkBody); // Sends request, checks the status, checks
-																			// the body
+		ResultMatcher checkStatus = status().isCreated();
+		ResultMatcher checkBody = content().json(testCreatedDoggoAsJSON);
+		// checks is status 201 (Created) does the body match sends request, checks the
+		// status, checks the body
+		this.mvc.perform(req).andExpect(checkStatus).andExpect(checkBody);
 	}
 
 	@Test
@@ -73,24 +74,24 @@ public class DinoControllerIntegrationTest {
 		ResultMatcher checkBody = content().json(testDogAsJSON); // does the body match
 		this.mvc.perform(req).andExpect(checkStatus).andExpect(checkBody);
 	}
-	
+
 	@Test
 	void testReplaceDog() throws Exception {
 		Doggo testDog = new Doggo(1, "Noms", 5, "Sausage");
 		String testDogAsJSON = this.mapper.writeValueAsString(testDog);
 		RequestBuilder req = put("/replace/1").contentType(MediaType.APPLICATION_JSON).content(testDogAsJSON);
 
-		ResultMatcher checkStatus = status().isAccepted(); 
+		ResultMatcher checkStatus = status().isAccepted();
 		ResultMatcher checkBody = content().json(testDogAsJSON); // does the body match
 		this.mvc.perform(req).andExpect(checkStatus).andExpect(checkBody);
 	}
-	
+
 	@Test
 	void testDeleteDog() throws Exception {
-	
+
 		RequestBuilder req = delete("/delete/1").contentType(MediaType.APPLICATION_JSON);
 		ResultMatcher checkStatus = status().isNoContent();
-		this.mvc.perform(req).andExpect(checkStatus); 
+		this.mvc.perform(req).andExpect(checkStatus);
 	}
 
 }
